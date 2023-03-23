@@ -1,0 +1,26 @@
+{% load static %}
+
+{% include "header.html" %}
+        <h1>language<h1>
+            {% comment %} {% for i in list %} {% endcomment %}
+            
+            
+            <div>
+                <h6>{{list}}:<h6>
+        </div>
+        <table border=3 celpading=3>
+            <tr>
+                <td>name</td>
+                <td>phone</td>
+            </tr>
+            {% for i in dic %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.phone}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <img src="{% static 'img.jpg' %}">
+        {% comment %} {% endfor %} {% endcomment %}
+        <script src="" async defer></script>
+{% include "footer.html" %}
