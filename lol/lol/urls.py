@@ -26,4 +26,6 @@ urlpatterns = [
     path('about/<id>', views.aboutus ),
 
 
+
+
 ]
