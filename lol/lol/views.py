@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from .form import user
 from .quiz import fun_quiz
+
 def about(r):
     return render(r,'about.html')
 def aboutus(r,id):
@@ -61,21 +62,27 @@ def calculator(request):
 
 def quiz(request):
     try:
-        m=fun_quiz().q1
+        m=fun_quiz().out[0]
+        
         if request.method == 'POST':
             form = fun_quiz(request.POST)
-            if form.is_valid():
-                o=form.cleaned_data['opt']
-                
-                if o[0]=='4':
-                    return render(request, 'quiz.html', {'total': 'correct','title':'your ans is','q':''})
-                else:
-                    return render(request, 'quiz.html', {'total': 'tu abhi garib hh be','title':'your ans is','q':''})
+            if form.is_valid() :
+                o=request.POST['opt']
+
             
+                
+                if o ==fun_quiz().out[1]:
+                    return render(request, 'quiz.html', {'total': 'correct','title':'your ans is','q':''})
+                   
+
+                else:
+                    return render(request, 'quiz.html', {'total':'wrong' ,'title':'your ans is','q':''})
+           
+                    
         else:
             
             form = fun_quiz()
             
     except:
-        pass
-    return render(request, 'quiz.html', {'form': form,'total':'submit','title':'quiz','q':m})
+       pass
+    return render(request, 'quiz.html', {'form': form,'total':'submit','title':'Quiz','q':m})
