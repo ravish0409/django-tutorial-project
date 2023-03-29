@@ -20,18 +20,20 @@ def contact(r):
    
   
     try:
-        if r.method=="post":
-            name=r.POST['name']
-            email=r.POST['email']
-            message=r.POST['message']
+        if r.method=="POST":
+            name=r.POST.get('name')
+            email=r.POST.get('email')
+            message=r.POST.get('message')
+            en=service(name=name,email=email,message=message)
+            en.save()
+            return render(r,'contact.html',{'ad':"thanks for contacing us",'ty':"text"}) 
            
     except:
         pass
-    if r.method=="GET":
-        return render(r,'contact.html',{'ad':"send message",'ty':"submit"})
+
+    return render(r,'contact.html',{'ad':"send message",'ty':"submit"})
     #this statment will change the contents of submit button after clicking in it
-    # return render(r,'contact.html',{'ad':"thanks for contacing us",'ty':"text"}) 
-    return redirect("/about/") #this will redirect to about page.
+    # return redirect("/about/") #this will redirect to about page.
 def index(r):
     table_data=service.objects.all()
     
@@ -44,7 +46,7 @@ def index(r):
         ],
         'tdata':table_data,
     }
-    print(list(table_data)[0])
+  
     return render(r,'index.html',data)
 # def calculator(r):
 #     c=0
