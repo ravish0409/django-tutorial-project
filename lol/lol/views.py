@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from .form import user
 from .quiz import fun_quiz
-
+from service.models import service
 def about(r):
     return render(r,'about.html')
 def aboutus(r,id):
@@ -24,15 +24,18 @@ def contact(r):
     # return render(r,'contact.html',{'ad':"thanks for contacing us",'ty':"text"}) 
     return redirect("/about/") #this will redirect to about page.
 def index(r):
+    table_data=service.objects.all()
+    
     data={
         'title':'Home page',
         'list':['python','c++','java'],
         'dic':[
         {'name':'rav','phone':'4554'},
         {'name':'anuj','phone':'7854'},
-
-        ]
+        ],
+        'tdata':table_data,
     }
+    print(list(table_data)[0])
     return render(r,'index.html',data)
 # def calculator(r):
 #     c=0
