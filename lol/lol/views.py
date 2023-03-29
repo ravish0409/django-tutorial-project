@@ -2,37 +2,51 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from .form import user
 from .quiz import fun_quiz
-
+from service.models import service
+from abcon.models import about_fun
 def about(r):
-    return render(r,'about.html')
+    data_obj=about_fun.objects.all().order_by('title')#this create a object of all file and sorted by title fied
+    if r.method=="GET":
+        st=r.GET.get('search')
+        if st!=None:
+            data_obj=about_fun.objects.filter(title__icontains=st)
+    data={
+        'data':data_obj
+    }
+    return render(r,'about.html',data)
 def aboutus(r,id):
     return HttpResponse(id)
 def contact(r):
    
   
     try:
-        if r.method=="post":
-            name=r.POST['name']
-            email=r.POST['email']
-            message=r.POST['message']
+        if r.method=="POST":
+            name=r.POST.get('name')
+            email=r.POST.get('email')
+            message=r.POST.get('message')
+            en=service(name=name,email=email,message=message)
+            en.save()
+            return render(r,'contact.html',{'ad':"thanks for contacing us",'ty':"text"}) 
            
     except:
         pass
-    if r.method=="GET":
-        return render(r,'contact.html',{'ad':"send message",'ty':"submit"})
+
+    return render(r,'contact.html',{'ad':"send message",'ty':"submit"})
     #this statment will change the contents of submit button after clicking in it
-    # return render(r,'contact.html',{'ad':"thanks for contacing us",'ty':"text"}) 
-    return redirect("/about/") #this will redirect to about page.
+    # return redirect("/about/") #this will redirect to about page.
 def index(r):
+    table_data=service.objects.all()
+    
     data={
         'title':'Home page',
         'list':['python','c++','java'],
         'dic':[
         {'name':'rav','phone':'4554'},
         {'name':'anuj','phone':'7854'},
-
-        ]
+        ],
+        'tdata':table_data,
     }
+  
     return render(r,'index.html',data)
 # def calculator(r):
 #     c=0

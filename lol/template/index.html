@@ -21,6 +21,25 @@
             {% endfor %}
         </table>
         <img src="{% static 'img.jpg' %}">
+
+        <h1>database table</h1>
+
+        <table border=3 celpading=3>
+            <tr>
+                <td>name</td>
+                <td>email</td>
+                <td>message</td>
+            </tr>
+            {% for i in tdata %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.message}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
         {% comment %} {% endfor %} {% endcomment %}
         <script src="" async defer></script>
 {% include "footer.html" %}
