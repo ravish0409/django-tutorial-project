@@ -3,8 +3,17 @@ from django.shortcuts import render,redirect
 from .form import user
 from .quiz import fun_quiz
 from service.models import service
+from abcon.models import about_fun
 def about(r):
-    return render(r,'about.html')
+    data_obj=about_fun.objects.all().order_by('title')#this create a object of all file and sorted by title fied
+    if r.method=="GET":
+        st=r.GET.get('search')
+        if st!=None:
+            data_obj=about_fun.objects.filter(title__icontains=st)
+    data={
+        'data':data_obj
+    }
+    return render(r,'about.html',data)
 def aboutus(r,id):
     return HttpResponse(id)
 def contact(r):

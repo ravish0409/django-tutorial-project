@@ -1,10 +1,16 @@
 
 {% load static %}
 {% include "header.html" %}
-<h2>Our Story</h2>
-<p>We started making soda in 1985 with a passion for quality and taste. Over the years, we have perfected our recipe and now offer a range of flavors that are loved by our customers.</p>
-<h2>Our Ingredients</h2>
-<p>We use only the finest natural ingredients in our soda, sourced from local farmers and suppliers whenever possible. Our sodas are free from artificial flavors and preservatives, and are vegan-friendly.</p>
-<h2>Our Mission</h2>
-<p>Our mission is to provide our customers with the best-tasting, highest-quality soda that they can feel good about drinking. We are committed to sustainability and reducing our environmental impact through responsible sourcing and packaging practices.</p>
+
+<br>
+<form method ="GET">
+    <input type="text" name="search" value="">
+    <input type="submit" value="search">
+</form>
+{%for i in data%}
+{{i.title | safe}}
+{{i.contant | safe}}
+{% empty %}
+<p style="color:red;" >no data found</p>
+{% endfor %}
 {% include "footer.html" %}
