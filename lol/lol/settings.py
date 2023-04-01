@@ -80,19 +80,19 @@ WSGI_APPLICATION = 'lol.wsgi.application'
 
 
 
-import dj_database_url
+# import dj_database_url
  
-DATABASES = {
-    'default': dj_database_url.parse('postgres://database_kfx3_user:oH9lt8ibxd7duaUwymWyvx5lDbBpg9mu@dpg-cgjr62grddleudrea0i0-a.oregon-postgres.render.com/database_kfx3')
-}
-
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
+#     'default': dj_database_url.parse('postgres://database_kfx3_user:oH9lt8ibxd7duaUwymWyvx5lDbBpg9mu@dpg-cgjr62grddleudrea0i0-a.oregon-postgres.render.com/database_kfx3')
 # }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
