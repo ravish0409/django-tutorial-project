@@ -4,6 +4,8 @@ from .form import user
 from .quiz import fun_quiz
 from service.models import service
 from abcon.models import about_fun
+from lol import settings
+import os
 def about(r):
     data_obj=about_fun.objects.all().order_by('title')#this create a object of all file and sorted by title fied
     if r.method=="GET":
@@ -36,7 +38,10 @@ def contact(r):
     # return redirect("/about/") #this will redirect to about page.
 def index(r):
     table_data=service.objects.all()
+    static_dir = os.path.join(settings.BASE_DIR, 'static/images') # replace 'static' with the name of your static directory
+    files = [f for f in os.listdir(static_dir) if os.path.isfile(os.path.join(static_dir, f))]
     
+
     data={
         'title':'Home page',
         'list':['python','c++','java'],
@@ -45,6 +50,7 @@ def index(r):
         {'name':'anuj','phone':'7854'},
         ],
         'tdata':table_data,
+        'range':files
     }
   
     return render(r,'index.html',data)
