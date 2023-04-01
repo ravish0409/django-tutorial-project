@@ -1,6 +1,42 @@
 {% load static %}
 
 {% include "header.html" %}
+<style>
+    .image-container {
+        display: flex;
+        flex-wrap: nowrap;
+      }
+      
+      .image-container img {
+        height: 100%;
+        object-fit: contain;
+        {% comment %} margin-right: 20px; {% endcomment %}
+      }
+      
+      /* Set the marquee styles */
+      marquee {
+        height: 200px;
+        width: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      
+      
+      /* Hide the scrollbar */
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      
+      
+</style>  
+<marquee scrollamount=20,behavior="scroll" direction="right">
+<div class="image-container" style="height: 200px; width: 100%;">
+    {% for i in range %}
+    <img src="static/images/{{i}}" alt="Image {{i}}">
+    {% endfor %}
+</div>
+</marquee>
         <h1>language<h1>
             {% comment %} {% for i in list %} {% endcomment %}
             
